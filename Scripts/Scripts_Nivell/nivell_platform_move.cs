@@ -22,10 +22,7 @@ public class nivell_platform_move : MonoBehaviour
         posFixedStart = startPosition;
     }
 
-    private void Update()
-    {
-        // This section can be used for input or non-physics updates
-    }
+
 
     private void FixedUpdate()
     {
