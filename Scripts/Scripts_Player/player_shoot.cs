@@ -2,10 +2,10 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-// Classe per disparar i canviar d'element que assigna un número a cada element segons el tipus que és l'usuari.
+// Class for shooting and changing elements that assigns a number to each element based on the type the user is.
 public class player_shoot : MonoBehaviour
 {
-    // Declaració de les variables necessàries.
+    // Variables declaration
     public GameObject player;
     public GameObject bulletPrefab;
     public GameObject bulletPrefabLeft;
@@ -19,7 +19,7 @@ public class player_shoot : MonoBehaviour
     private void Start()
     {
 
-        // Obtenim el Renderitzador de Sprites del objecte Player.
+        // We obtain the Sprite Renderer of the Player object.
         player = GameObject.Find("Player");
         //m_SpriteRenderer = player.GetComponent<SpriteRenderer>();
         animacio = player.GetComponent<Animator>();
@@ -49,7 +49,7 @@ public class player_shoot : MonoBehaviour
             animacio.SetInteger("idle", 0);
         }
 
-        // Segons la tecla que es pressioni es canviarà d'element al jugador i s'assignarà a la variable element.
+    // Depending on the key pressed, the player's element will change and be assigned to the variable "element".
         if (Input.GetKey("1"))
         {
             //m_SpriteRenderer.sprite = Resources.Load<Sprite>("player_foc");
@@ -74,7 +74,7 @@ public class player_shoot : MonoBehaviour
             esPotDisparar = true;
         }
 
-        // Control de la direcció del dispar segons la direcció que està mirant l'usuari.
+     // Manage of the shooting direction based on the direction the player is facing.
         if (Input.GetMouseButtonDown(0) && player.transform.localScale.x == 1 && esPotDisparar == true && Time.time > nextFire)
         {
             nextFire = Time.time + fireRate;
@@ -88,7 +88,7 @@ public class player_shoot : MonoBehaviour
         }
     }
 
-    // Instanciem el prefab de bala corresponent a cada cas.
+// Instantiate the corresponding bullet prefab for each case.
     public void disparar()
     {
         GameObject b = Instantiate(bulletPrefab) as GameObject;
