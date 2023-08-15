@@ -2,15 +2,15 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-//Classe enemic que fa el control de la vida de cada objecte enemic.
+//Class that manages the life control of each enemy object.
 public class enemy_vida : MonoBehaviour
 {
-    //Vida inicial i animació de mort.
+   // Initial health and death animation.
     public int health = 120;
     public GameObject explosio;
 
-    // Mètode que és cridat des de player_bullet per anar restant la vida segons l'element.
-    public void TakeDamage(int damage)
+// Method called from player_bullet to gradually decrease the enemy's health based on the element.
+public void TakeDamage(int damage)
     {
         health -= damage;
         Debug.Log(damage);
@@ -21,7 +21,7 @@ public class enemy_vida : MonoBehaviour
         }
     }
 
-    // Animació de mort i destrucció de l'enemic i de l'animació de mort.
+// Death animation and destruction of the enemy along with the death animation.
     private void Die()
     {
         GameObject e = Instantiate(explosio) as GameObject;
