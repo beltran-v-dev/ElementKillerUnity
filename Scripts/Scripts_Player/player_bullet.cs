@@ -3,10 +3,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-// Classe que conté cada bala al ser instanciada i fa control del mal que ha de fer segons l'enemic que toca i l'element que és l'usuari.
+// Class that contains each bullet when instantiated and controls the damage it should deal based on the enemy it hits and the player element
 public class player_bullet : MonoBehaviour
 {
-    //Declaració de variables necessàries.
+    //Variables declaration
     public float speed = 1300.0f;
 
     private Rigidbody2D rb;
@@ -21,7 +21,7 @@ public class player_bullet : MonoBehaviour
         rb = this.GetComponent<Rigidbody2D>();
         rb.velocity = new Vector2(speed * Time.deltaTime, 0);
 
-        // Segons l'escala (direcció que mira) l'usuari dispararem la bala en una direcció o una altre.
+        // According to the scale (direction the user is facing), we will shoot the bullet in one direction or another.
         player = GameObject.Find("Player");
 
         if (player.transform.localScale.x == -1)
@@ -29,15 +29,15 @@ public class player_bullet : MonoBehaviour
             rb.velocity = -rb.velocity;
         }
 
-        // Busquem els límits de la pantalla per la part dreta.
+        //We search for the screen boundaries on the right side.
         screenBounds = Camera.main.ScreenToWorldPoint(new Vector3(Screen.width, Screen.height, Camera.main.transform.position.z));
     }
 
     // Update is called once per frame
     private void Update()
     {
-        // Del objecte Shoot, agafem l'script player_shoot per consultar el número
-        // d'element que és i assignem uns valors de mal segons aquest.
+     // From the Shoot object, we retrieve the player_shoot script to check the element number
+    // and assign damage values accordingly.
         GameObject mal = GameObject.Find("Shoot");
         player_shoot tipusElement = mal.GetComponent<player_shoot>();
 
@@ -62,14 +62,10 @@ public class player_bullet : MonoBehaviour
             colorVerd = 120;
         }
 
-        // Si la bala surt de la pantalla es destrueix.
-        //if (transform.position.x > screenBounds.x + 1)
-        //{
-        //    Destroy(this.gameObject);
-        //}
+    
     }
 
-    // Control de l'enemic que impacta la bala i cridem el mètode que té cada enemic per aplicar el mal i destrucció de la bala.
+   // Handling of the enemy hit by the bullet and calling the method unique to each enemy to apply damage and destroy the bullet.
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.gameObject.tag == "Enemic")
@@ -102,7 +98,8 @@ public class player_bullet : MonoBehaviour
             Destroy(this.gameObject);
         }
 
-        // Si la bala toca algun objecte del nivell es destrueix.
+      // If the bullet hits any object in the level, it is destroyed.
+
         if (collision.tag == "Nivell")
         {
             Destroy(this.gameObject);
